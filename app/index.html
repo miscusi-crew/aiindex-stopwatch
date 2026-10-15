@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stopwatch & Countdown</title>
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="base.css">
+<style>
+  .tabs{display:flex;gap:.25rem;padding:.25rem;border:1px solid var(--line);border-radius:.6rem;background:var(--card);width:max-content}
+  .tabs button{border:0;background:transparent}
+  .tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-fg)}
+  .clock{font-size:clamp(3rem,16vw,5.5rem);font-weight:700;font-variant-numeric:tabular-nums;margin:.75rem 0;letter-spacing:-.02em}
+  .clock small{font-size:.45em;color:var(--muted)}
+  .controls button{min-width:6rem;padding:.6rem 1rem}
+  ol{padding-left:0;list-style:none;font-variant-numeric:tabular-nums;max-width:22rem}
+  ol li{display:flex;justify-content:space-between;padding:.35rem 0;border-bottom:1px solid var(--line)}
+  li.best{color:var(--good);font-weight:600}li.worst{color:var(--bad);font-weight:600}
+  .presets{display:flex;flex-wrap:wrap;gap:.35rem;margin:.5rem 0}
+  .custom{display:flex;gap:.35rem;align-items:center}
+  .custom input{width:4.5rem}
+</style>
+</head>
+<body>
+<main>
+  <h1>Stopwatch & Countdown</h1>
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tab-sw" aria-selected="true" aria-controls="sw">Stopwatch</button>
+    <button role="tab" id="tab-cd" aria-selected="false" aria-controls="cd">Countdown</button>
+  </div>
+  <section id="sw" role="tabpanel" aria-labelledby="tab-sw">
+    <p class="clock" id="sw-clock" role="timer">00:00<small>.00</small></p>
+    <div class="row controls"><button id="sw-go" class="primary">Start</button><button id="sw-lap" disabled>Lap</button><button id="sw-reset">Reset</button></div>
+    <ol id="laps" aria-label="Laps"></ol>
+  </section>
+  <section id="cd" role="tabpanel" aria-labelledby="tab-cd" hidden>
+    <div class="presets" id="presets"></div>
+    <div class="custom"><input type="number" id="cd-min" min="0" max="999" value="5" aria-label="Minutes"> min <input type="number" id="cd-sec" min="0" max="59" value="0" aria-label="Seconds"> sec <button id="cd-set">Set</button></div>
+    <p class="clock" id="cd-clock" role="timer">05:00</p>
+    <div class="row controls"><button id="cd-go" class="primary">Start</button><button id="cd-reset">Reset</button></div>
+    <p class="msg" id="cd-msg" role="status"></p>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
